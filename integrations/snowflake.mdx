@@ -1,0 +1,67 @@
+---
+title: "Connect Snowflake to Lemonado"
+sidebarTitle: "Snowflake"
+description: "Connect your Snowflake data warehouse to Lemonado to query internal data alongside your ad platform and analytics data in real time."
+---
+
+The Snowflake integration lets you connect your existing data warehouse and query it alongside your marketing platform data. Pull in internal metrics, product data, or first-party customer data — all queryable through the same Lemonado chat interface you use for your ad platforms and analytics.
+
+## What data is available
+
+Lemonado connects to your Snowflake warehouse with read-only access. You choose which schemas and tables to expose during setup — Lemonado won't automatically surface everything in your warehouse. Once connected, Lemonado queries your tables directly via the Snowflake API, so the data is always current and reflects your latest warehouse state.
+
+## Authentication
+
+Snowflake uses API key authentication rather than OAuth. Before connecting, have the following details ready:
+
+- **Snowflake account URL** — your organization's Snowflake endpoint (e.g. `https://xyz.snowflakecomputing.com`)
+- **Database name** — the database containing the data you want to expose
+- **Schema** — the specific schema within that database
+- **Warehouse name** — the Snowflake compute warehouse to run queries against
+- **Username and password / API key** — credentials for a read-only service account
+
+All credentials are stored securely and are never shared with AI tools directly. Lemonado uses them only to execute read queries on the tables you select.
+
+## How to connect
+
+<Steps>
+  <Step title="Open Data sources">
+    Go to **Data** in the Lemonado sidebar.
+  </Step>
+  <Step title="Add a new source">
+    Click **Connect source**.
+  </Step>
+  <Step title="Select Snowflake">
+    Select **Snowflake** from the list of available integrations.
+  </Step>
+  <Step title="Enter connection details">
+    Enter your Snowflake connection details — account URL, database, schema, warehouse, and credentials.
+  </Step>
+  <Step title="Verify the connection">
+    Click **Connect** — Lemonado verifies the connection and confirms access.
+  </Step>
+  <Step title="Select tables">
+    Select the tables you want to make available for querying in Chat and Studio.
+  </Step>
+</Steps>
+
+## Example queries
+
+Once connected, ask questions like these directly in Chat:
+
+- "Join Snowflake customer data with Meta Ads spend to show CLTV by acquisition campaign."
+- "Which product SKUs had the highest return rate, and which marketing channels drove those customers?"
+- "Compare conversion rates from the CRM with ad platform attribution data."
+
+<Note>
+  Snowflake and ClickHouse integrations are available on the **Enterprise plan**. [Contact us](mailto:hello@lemonado.io) to discuss access.
+</Note>
+
+<CardGroup cols={2}>
+  <Card title="Integrations Overview" href="/integrations/overview">
+    See all available data sources and integrations supported by Lemonado.
+  </Card>
+  <Card title="CSV Upload" href="/integrations/csv">
+    Upload a one-off dataset without a live integration using CSV upload.
+  </Card>
+</CardGroup>

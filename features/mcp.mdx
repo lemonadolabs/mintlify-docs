@@ -1,0 +1,89 @@
+---
+title: "Custom MCPs: Connect Live Data to Any AI Tool"
+sidebarTitle: "MCP Connectors"
+description: "Lemonado's Custom MCP connectors expose your governed, real-time marketing data to Claude, ChatGPT, Gemini, n8n, and any other MCP-compatible AI tool."
+---
+
+Custom MCPs give any AI tool you already use direct access to your live marketing data. Lemonado implements the Model Context Protocol (MCP), the open standard for connecting AI tools to live data sources. One click inside Lemonado creates a scoped, read-only MCP endpoint for a workspace. Paste the connection details into Claude, ChatGPT, Cursor, n8n, or any MCP-compatible tool, and it can immediately query your blended, governed marketing dataset — no raw API credentials, no manual exports, no stale data.
+
+## What is MCP?
+
+MCP (Model Context Protocol) is an open standard that lets AI tools like Claude, ChatGPT, and Cursor securely connect to external data sources. Without MCP, those tools can only work with data you paste in manually. With Lemonado's MCP server, they get direct access to your unified marketing dataset — every ad platform, analytics source, and revenue tool you've connected — instead of raw, siloed platform APIs.
+
+The result: the AI tool you already use becomes dramatically more useful the moment it can answer real questions about your campaigns, clients, and performance.
+
+## Supported AI tools
+
+Connect Lemonado's MCP to any of the following — or any other MCP-compatible tool:
+
+- Claude (claude.ai)
+- ChatGPT (chatgpt.com)
+- Gemini
+- Grok
+- Cursor
+- n8n
+- Perplexity
+- Any MCP-compatible tool
+
+## MCP server URL
+
+Point your AI tool's connector settings to:
+
+```
+https://mcp.lemonado.io/mcp
+```
+
+Each connection is per-workspace (per-client), scoped, and read-only.
+
+## Authentication
+
+Choose the method that fits your setup:
+
+- **OAuth (recommended)** — authorize via Lemonado's OAuth flow. No credentials to manage manually, no tokens to rotate. Lemonado handles the session.
+- **Bearer token** — generate a token inside Lemonado and paste it into your AI tool's connector settings. Use this if your tool doesn't support OAuth or you need a static credential for an automation.
+
+## Creating an MCP connection
+
+<Steps>
+  <Step title="Open AI Connectors">
+    Go to **AI Connectors** in the sidebar.
+  </Step>
+  <Step title="Create a new connector">
+    Click **New AI Connector**.
+  </Step>
+  <Step title="Select a workspace">
+    Choose the client workspace you want to expose. Each connection is scoped to a single workspace.
+  </Step>
+  <Step title="Choose authentication">
+    Select **OAuth** (recommended) or **Bearer token**.
+  </Step>
+  <Step title="Copy the connection details">
+    Lemonado generates the MCP server URL and any required credentials. Copy them.
+  </Step>
+  <Step title="Paste into your AI tool">
+    Open your AI tool's connector or plugin settings and paste in the connection details. See the guides for [Claude](/ai-connectors/claude) and [ChatGPT](/ai-connectors/chatgpt) for step-by-step instructions.
+  </Step>
+</Steps>
+
+## Per-client scoping
+
+Each MCP connection is tied to a single workspace. The AI tool only sees that client's data — no token juggling, no risk of cross-client data leakage. Create a separate connection for each client so every AI session operates in the correct context with the correct permissions. The AI inherits the governance you've already set up in Lemonado.
+
+## Security
+
+Lemonado's MCP is built with agency and enterprise security requirements in mind:
+
+- **Read-only** — the AI tool can query and analyze data, but cannot modify or delete anything in Lemonado or your connected platforms.
+- **Per-workspace** — each connection is scoped to one workspace. An AI tool connected to Client A cannot see Client B's data.
+- **Revocable** — revoke any connection at any time from the AI Connectors page. Access stops immediately.
+- **Logged** — every query the AI tool makes is logged and visible in your Lemonado workspace. Full auditability.
+- **No credential exposure** — your AI tool never touches your underlying ad platform credentials. It only sees the governed data layer inside Lemonado.
+
+<CardGroup cols={2}>
+  <Card title="Connect to Claude" icon="message-bot" href="/ai-connectors/claude">
+    Step-by-step guide to connecting Lemonado's MCP to Claude.
+  </Card>
+  <Card title="Connect to ChatGPT" icon="message" href="/ai-connectors/chatgpt">
+    Step-by-step guide to connecting Lemonado's MCP to ChatGPT.
+  </Card>
+</CardGroup>

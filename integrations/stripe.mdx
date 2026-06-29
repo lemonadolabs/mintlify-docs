@@ -1,0 +1,62 @@
+---
+title: "Connect Stripe to Lemonado"
+sidebarTitle: "Stripe"
+description: "Connect Stripe to Lemonado to analyze revenue, subscriptions, and customer retention data alongside your ad spend and marketing performance."
+---
+
+The Stripe integration brings payment and revenue data — customers, subscriptions, invoices, and transactions — into Lemonado. Query it alongside your ad platforms to close the loop between marketing spend and actual revenue, without exporting a single spreadsheet.
+
+## What data is available
+
+- Customer records and revenue by customer
+- Subscriptions, MRR, ARR, and churn
+- Invoices and payment events
+- Transaction history
+- All data is read-only
+
+## How to connect
+
+<Steps>
+  <Step title="Open Data sources">
+    Go to **Data** in the Lemonado sidebar.
+  </Step>
+  <Step title="Add a new source">
+    Click **Connect source**.
+  </Step>
+  <Step title="Select Stripe">
+    Select **Stripe** from the list of available integrations.
+  </Step>
+  <Step title="Authorize via OAuth">
+    Complete the OAuth flow — authorize Lemonado to read your Stripe data.
+  </Step>
+  <Step title="Start syncing">
+    Data starts syncing immediately. Your Stripe data is now available in Chat and Studio.
+  </Step>
+</Steps>
+
+## Example queries
+
+Once connected, ask questions like these directly in Chat:
+
+- "What is MRR and churn rate this month vs. last month?"
+- "Which marketing channels drove the highest revenue customers?"
+- "Find customers who started a free trial but never converted to paid."
+- "What percentage of this month's Stripe revenue came from Google Ads leads?"
+- "Show me customers by lifetime value, segmented by acquisition channel."
+
+## Revenue attribution
+
+Connect Stripe alongside Google Analytics and your ad platforms to run full-funnel attribution analysis. Ask questions like _"Which campaign drove the most LTV-positive customers last quarter?"_ — Lemonado joins ad spend, behavioral data, and Stripe revenue across sources to answer it directly.
+
+<Note>
+  Stripe data is read-only. Lemonado cannot create or modify charges, subscriptions, or customers.
+</Note>
+
+<CardGroup cols={2}>
+  <Card title="Google Analytics" href="/integrations/google-analytics">
+    Combine GA4 traffic and conversion data with Stripe revenue for end-to-end attribution.
+  </Card>
+  <Card title="Chat" href="/features/chat">
+    Learn how to query your connected data sources using natural language in Chat.
+  </Card>
+</CardGroup>

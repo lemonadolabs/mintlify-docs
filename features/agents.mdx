@@ -1,0 +1,88 @@
+---
+title: "Proactive Agents: Automate Monitoring and Reporting"
+sidebarTitle: "Agents"
+description: "Lemonado agents monitor your marketing data on a schedule, flag anomalies, and deliver structured reports — without you having to check anything manually."
+---
+
+Proactive Agents are AI agents you configure inside Lemonado that run on a schedule, monitor your live data, and deliver results to Slack, email, or in-app. You tell Lemonado what to watch — a metric, a client, a threshold, a report — and it handles the querying, analysis, and delivery. No workflow tools, no code, no manual checking. The data, logic, and verification are already done.
+
+## Two types of agents
+
+<CardGroup cols={2}>
+  <Card title="Custom Agent" icon="robot">
+    Runs periodic analysis and produces structured output. Set a schedule, describe what you want monitored, and Lemonado generates a report on each run. Use custom agents for proactive insight: morning digests, weekly performance reports, and cross-client summaries.
+  </Card>
+  <Card title="Alert Monitor" icon="bell">
+    Watches a metric and only notifies you when a threshold is crossed. Alert monitors fire only when something needs your attention — silence means everything is on track.
+  </Card>
+</CardGroup>
+
+## What agents can do
+
+Agents can do anything you can ask in Chat — on a schedule.
+
+**Custom agents:**
+- Daily morning digest of how every client is performing
+- Weekly branded Studio report delivered to each client's Slack channel
+- Monthly cross-client spend and ROAS summary
+
+**Alert monitors:**
+- Alert if daily spend drops below 70% of expected on any active campaign
+- Notify when a top ad's CTR falls two weeks in a row (creative fatigue signal)
+- Flag conversion tracking gaps across all client accounts
+- Warn when any campaign exceeds budget pacing by 20%
+
+## Setting up an agent
+
+<Steps>
+  <Step title="Open Agents">
+    Go to **Agents** in the sidebar. You can also open Agents from inside a specific client workspace to scope the agent to that client.
+  </Step>
+  <Step title="Create a new agent">
+    Click **New Agent**.
+  </Step>
+  <Step title="Choose the agent type">
+    Select **Custom Agent** for periodic analysis and reporting, or **Alert Monitor** for threshold-based notifications.
+  </Step>
+  <Step title="Describe what you want">
+    Write a plain-language description of what the agent should do — for example, "Monitor weekly signups and churn" or "Alert me if any client's daily spend drops 30% below normal."
+  </Step>
+  <Step title="Set the schedule or threshold">
+    For custom agents, choose the run frequency (daily, weekly, monthly, or a custom cron). For alert monitors, define the metric and the threshold that should trigger a notification.
+  </Step>
+  <Step title="Choose a delivery channel">
+    Select a Slack channel, one or more email addresses, or in-app delivery — or combine them.
+  </Step>
+  <Step title="Save and activate">
+    Click **Save**. The agent starts running on its next scheduled cycle. No further configuration required.
+  </Step>
+</Steps>
+
+## Delivery channels
+
+Route agent outputs to wherever the right people are:
+
+- **Slack** — send to any channel, scoped per client workspace or broadcast cross-client to your team's performance channel.
+- **Email** — add one or more recipient addresses. Useful for exec summaries or client-facing digests.
+- **In-app** — view all agent runs and their outputs directly in the Lemonado dashboard. Every run is stored and accessible at any time.
+
+## Inspecting agent runs
+
+Every agent run keeps a full log: the prompt it used, the SQL queries it ran, the data it pulled, and the output it delivered. Open any past run at any time to trace the logic, verify the numbers, or understand why a notification fired. Agents are not a black box.
+
+<Tip>
+  Use Custom Agents to generate and deliver a Studio report on a schedule. Set the agent to refresh the report and send it as a PDF or link to Slack every Monday morning — so clients get live numbers before their week starts.
+</Tip>
+
+<Note>
+  Alert agents consume credits only when they fire. Custom agents consume credits on each scheduled run.
+</Note>
+
+<CardGroup cols={2}>
+  <Card title="Studio" icon="chart-bar" href="/features/studio">
+    Build branded reports and deliver them automatically with agents.
+  </Card>
+  <Card title="MCP Connectors" icon="plug" href="/features/mcp">
+    Connect your live Lemonado data to Claude, ChatGPT, and other AI tools.
+  </Card>
+</CardGroup>

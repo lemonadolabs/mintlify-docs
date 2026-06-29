@@ -1,0 +1,127 @@
+---
+title: "Connect Lemonado to Claude via MCP"
+sidebarTitle: "Claude"
+description: "Add Lemonado as an MCP connector in Claude to give your AI co-pilot secure, real-time access to your live marketing and revenue data."
+---
+
+This guide walks you through adding Lemonado as an MCP connector inside Claude. Once connected, Claude can query your live marketing data — Google Ads, Meta, LinkedIn, TikTok, Stripe, and more — directly in chat, without you pasting a single CSV or exporting anything.
+
+## Before you begin
+
+<Note>
+  Make sure you have the following before starting:
+
+  - An active Lemonado account (a 10-day free trial is available at [data.lemonado.io](https://data.lemonado.io/signup))
+  - At least one data source connected inside Lemonado
+  - A [claude.ai](https://claude.ai) account (any plan)
+</Note>
+
+## Step 1: Open connector settings in Claude
+
+<Steps>
+  <Step title="Go to Claude">
+    Navigate to [claude.ai](https://claude.ai) in your browser.
+  </Step>
+  <Step title="Open Settings">
+    Click your **profile icon** in the top-right corner, then select **Settings**.
+  </Step>
+  <Step title="Navigate to Connectors">
+    In the Settings sidebar, click **Connectors**.
+  </Step>
+  <Step title="Add a custom connector">
+    Click **Add custom connector** to open the connector configuration window.
+  </Step>
+</Steps>
+
+<Note>
+  You can create multiple Lemonado connectors inside Claude — one per client, team, or use case — each pointing to a different Lemonado workspace.
+</Note>
+
+## Step 2: Add Lemonado as a connector
+
+<Steps>
+  <Step title="Enter your connector details">
+    In the **Add custom connector** window, fill in the following:
+
+    - **Name:** `Lemonado`
+    - **MCP Server URL:** `https://mcp.lemonado.io/mcp`
+    - **Authentication:** OAuth (recommended)
+  </Step>
+  <Step title="Save the connector">
+    Click **Add** to save the connector configuration.
+  </Step>
+  <Step title="Begin authentication">
+    Click **Connect** to start the OAuth flow.
+  </Step>
+  <Step title="Authorize Claude in Lemonado">
+    A browser window will open. Log into Lemonado and authorize Claude to access your workspace data.
+  </Step>
+  <Step title="Confirm the connection">
+    Once authentication completes, the connector shows as **Connected** in your Claude settings.
+  </Step>
+</Steps>
+
+<Note>
+  Claude may display a warning that this connector is built by an external developer. Lemonado is fully read-only — it can query and analyze your data but cannot modify or delete anything in your connected platforms.
+</Note>
+
+## Step 3: Activate Lemonado in a chat
+
+<Steps>
+  <Step title="Start a new chat">
+    Open a new chat in Claude.
+  </Step>
+  <Step title="Open the connector picker">
+    Click the **+** icon in the chat input bar to open the files, connectors, and tools menu.
+  </Step>
+  <Step title="Find Lemonado">
+    Scroll through the list of available connectors and select **Lemonado**.
+  </Step>
+  <Step title="Toggle it on">
+    Enable Lemonado for the current chat. Claude will now automatically route relevant data queries to your Lemonado workspace.
+  </Step>
+</Steps>
+
+## Using Lemonado inside Claude Projects
+
+If you use [Claude Projects](https://support.anthropic.com/en/articles/9517075-what-are-projects) to organize work by client or team, enable Lemonado inside the Project to keep the connection active across every chat in that Project.
+
+When Lemonado is enabled at the Project level, Claude can combine:
+
+- **Project context** — strategy docs, brand guidelines, reporting templates
+- **Conversation history** — prior decisions and notes accumulated in the Project
+- **Live marketing data** — real-time campaign metrics queried directly from Lemonado
+
+For agencies, this creates a persistent AI analyst per client — structured data, historical context, and strategic documentation all in one place, always current.
+
+## Example queries
+
+Once Lemonado is active in a chat, try questions like:
+
+- "Which campaigns across Google, Meta, and LinkedIn drove the highest ROAS this week?"
+- "Compare cost per purchase by channel over the last 30 days."
+- "Which campaigns have spent over $5,000 with no conversions this month?"
+- "Break down revenue by campaign and ad set for last quarter."
+
+Claude queries Lemonado's unified SQL engine to answer these questions in real time — combining data from multiple platforms in a single response.
+
+## Managing the connection
+
+To disconnect or remove the connector, go to **Settings → Connectors** in Claude, select **Lemonado**, and choose **Disconnect** or **Remove**.
+
+You can also revoke OAuth access directly from your Lemonado workspace under **AI Connectors** — this immediately invalidates the token without requiring any action inside Claude.
+
+## Best practices
+
+- **Scope access appropriately** — only connect the data sources your team needs for the queries you plan to run.
+- **Review query logs periodically** — monitor the Lemonado query log to track how Claude is accessing your data.
+- **Rotate tokens regularly** — refresh OAuth tokens periodically and remove any connectors that are no longer in active use.
+
+<CardGroup cols={2}>
+  <Card title="Claude Skills Guide" icon="graduation-cap" href="/ai-connectors/claude-skills">
+    Use Claude Skills with Lemonado MCP to run consistent weekly reports, audits, and creative reviews automatically.
+  </Card>
+  <Card title="Connect to ChatGPT" icon="message" href="/ai-connectors/chatgpt">
+    Add Lemonado as an MCP connector in ChatGPT and query live marketing data without exporting anything.
+  </Card>
+</CardGroup>

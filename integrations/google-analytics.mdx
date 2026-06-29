@@ -1,0 +1,66 @@
+---
+title: "Connect Google Analytics (GA4) to Lemonado"
+sidebarTitle: "Google Analytics"
+description: "Connect GA4 to Lemonado to analyze traffic, conversions, and user behavior alongside your ad spend and revenue data in real time."
+---
+
+GA4 traffic, conversion events, user behavior, and performance metrics — all queryable alongside your ad platform and revenue data in Lemonado. Authentication is handled via OAuth, and data syncs in real time the moment you connect.
+
+## What data is available
+
+- Sessions, users, pageviews, bounce rate, and session duration
+- Conversion events and goals
+- Traffic source and channel breakdowns
+- Device, geography, and demographic reports
+- E-commerce event data (if configured in GA4)
+- All data is read-only
+
+## How to connect
+
+<Steps>
+  <Step title="Open Data sources">
+    Go to **Data** in the Lemonado sidebar.
+  </Step>
+  <Step title="Add a new source">
+    Click **Connect source**.
+  </Step>
+  <Step title="Select Google Analytics">
+    Select **Google Analytics** from the list of available integrations.
+  </Step>
+  <Step title="Authorize via OAuth">
+    Complete the OAuth flow — you'll be redirected to Google to authorize access.
+  </Step>
+  <Step title="Choose your GA4 property">
+    Select the GA4 property you want to include.
+  </Step>
+  <Step title="Start syncing">
+    Data starts syncing immediately. Your GA4 data is now available in Chat and Studio.
+  </Step>
+</Steps>
+
+## Example queries
+
+Once connected, ask questions like these directly in Chat:
+
+- "Which traffic source drove the most conversions last week?"
+- "Show me daily organic sessions vs. paid sessions for the last 30 days."
+- "What is the mobile vs. desktop conversion rate breakdown this month?"
+- "Which landing pages have the highest bounce rate among paid traffic?"
+- "Compare conversion rates across countries for Q2."
+
+## Cross-channel analysis
+
+With GA4 connected alongside your ad platforms, you can run attribution analysis directly in Chat. For example, ask: _"How much Google Ads spend led to Stripe revenue this quarter?"_ Lemonado joins the data across sources automatically — no manual exports or spreadsheet merges required.
+
+<Note>
+  Google Analytics data is read-only. Lemonado cannot create, edit, or delete any GA4 properties, events, or configuration.
+</Note>
+
+<CardGroup cols={2}>
+  <Card title="Google Search Console" href="/integrations/google-search-console">
+    Analyze organic search performance alongside your paid media and GA4 data.
+  </Card>
+  <Card title="Stripe" href="/integrations/stripe">
+    Connect revenue data to close the loop between traffic and actual conversions.
+  </Card>
+</CardGroup>

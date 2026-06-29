@@ -1,72 +1,96 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Mintlify Starter Kit",
-  "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
-  },
-  "favicon": "/favicon.svg",
-  "navigation": {
-    "pages": [
-      {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
+  "name": "Lemonado",
+  "theme": "almond",
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "https://media.brand.dev/26992676-a23a-4c08-a586-bbc8cafa42bd.svg",
+    "dark": "https://media.brand.dev/26992676-a23a-4c08-a586-bbc8cafa42bd.svg"
+  },
+  "favicon": "https://media.brand.dev/2f9c8199-1912-4762-84dc-e96e8b5fa54f.png",
+  "colors": {
+    "primary": "#0e162d",
+    "light": "#848c94",
+    "dark": "#c8cace"
+  },
+  "fonts": {
+    "heading": {
+      "family": "Manrope"
+    },
+    "body": {
+      "family": "Inter"
+    }
   },
   "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "label": "Try for free",
+      "href": "https://data.lemonado.io"
     }
   },
-  "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "connecting-data",
+              "workspaces"
+            ]
+          },
+          {
+            "group": "Features",
+            "pages": [
+              "features/chat",
+              "features/studio",
+              "features/creative-analytics",
+              "features/agents",
+              "features/mcp"
+            ]
+          },
+          {
+            "group": "AI Connectors",
+            "pages": [
+              "ai-connectors/overview",
+              "ai-connectors/claude",
+              "ai-connectors/chatgpt",
+              "ai-connectors/claude-skills"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "integrations/overview",
+              "integrations/google-ads",
+              "integrations/meta-ads",
+              "integrations/linkedin-ads",
+              "integrations/tiktok-ads",
+              "integrations/google-analytics",
+              "integrations/google-search-console",
+              "integrations/stripe",
+              "integrations/snowflake",
+              "integrations/google-sheets",
+              "integrations/csv"
+            ]
+          },
+          {
+            "group": "Resources",
+            "pages": [
+              "resources/prompt-library",
+              "resources/pricing",
+              "resources/faq"
+            ]
+          }
+        ]
+      }
     ]
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "website": "https://lemonado.io"
     }
   }
 }

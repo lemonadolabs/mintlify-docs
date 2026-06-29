@@ -1,0 +1,84 @@
+---
+title: "Connecting Data Sources to Lemonado"
+sidebarTitle: "Connect Data"
+description: "Learn how to connect ad platforms, analytics tools, and databases to Lemonado so your team can query all your marketing data in one place."
+---
+
+The **Data** tab is where you manage every data source connected to your Lemonado workspace. When you connect a source, Lemonado begins syncing it into your unified data layer — blending it with all your other connected platforms into a single, query-ready dataset. From that point on, every chat question, Studio build, and agent task runs against live data from all your sources at once, with no need to export, upload, or switch tabs. All connectors are **read-only**: Lemonado never writes data back to your platforms or modifies campaigns, budgets, or settings.
+
+## How to connect a source
+
+<Steps>
+  <Step title="Go to Data in the left sidebar">
+    Click **Data** in the left sidebar to open your data library. You'll see all currently connected sources listed here.
+  </Step>
+
+  <Step title="Click Connect source">
+    Click **Connect source** in the top right corner of the Data tab to open the integration picker.
+  </Step>
+
+  <Step title="Select your integration">
+    Click the icon for the integration you want to add. Browse by category or use the search bar to find a specific platform.
+  </Step>
+
+  <Step title="Authenticate">
+    Authenticate with the platform. Most integrations use **OAuth** — you'll be redirected to the platform's login page and back in about 30 seconds. Warehouse integrations like Snowflake and ClickHouse use an **API key** instead.
+  </Step>
+
+  <Step title="Select accounts or data">
+    Choose the specific ad accounts, properties, or datasets you want to include. You can always come back and adjust this selection later.
+  </Step>
+
+  <Step title="Wait for the initial sync">
+    Your data starts syncing immediately. Most ad platforms are available in real time within seconds of connecting. Check the Data tab to see sync status.
+  </Step>
+</Steps>
+
+## Available integrations
+
+| Integration | Category | Auth method | Refresh rate |
+|---|---|---|---|
+| Google Ads | Ad platform | OAuth | Real-time |
+| Meta Ads | Ad platform | OAuth | Real-time |
+| LinkedIn Ads | Ad platform | OAuth | Real-time |
+| TikTok Ads | Ad platform | OAuth | Real-time |
+| Google Analytics (GA4) | Analytics | OAuth | Real-time |
+| Google Search Console | Analytics | OAuth | Real-time |
+| YouTube | Video | OAuth | Real-time |
+| Stripe | Revenue | OAuth / Webhooks | Real-time |
+| Google Sheets | Spreadsheet | OAuth | On update |
+| CSV | File upload | — | Manual |
+| Snowflake | Data warehouse | API key | Configurable |
+| ClickHouse | Data warehouse | API key | Configurable |
+| Sharetribe | Marketplace | API | Configurable |
+| WhatConverts | Lead tracking | API | Configurable |
+| Instagram Organic | Social | OAuth | Scheduled |
+| Facebook Organic | Social | OAuth | Scheduled |
+
+## Managing connected sources
+
+Open the **Data** tab at any time to review and manage your connected sources:
+
+- **Add accounts** — click into any connected source to add additional ad accounts, properties, or datasets to the existing connection. You don't need to re-authenticate.
+- **Remove accounts** — deselect specific accounts or datasets from a connection to stop syncing them. The historical data already in your workspace is removed from queries immediately.
+- **Adjust parameters** — some integrations let you configure lookback windows, currency settings, or other parameters. Access these from the source's detail view in the Data tab.
+- **Revoke access** — click the three-dot menu on any source and select **Disconnect** to fully revoke Lemonado's access. Revoking access removes that source's data from all queries and reports in your workspace right away.
+
+## Data freshness
+
+Most ad platforms (Google Ads, Meta Ads, LinkedIn Ads, TikTok Ads) refresh in real time — when you ask a question in Chat, you're querying today's data, not a cached snapshot. Other sources, like Google Sheets or social organic data, refresh on update or a scheduled basis depending on what their APIs support. Configurable warehouse integrations like Snowflake and ClickHouse let you set your own sync frequency.
+
+Lemonado never stores data beyond what the connected source currently provides. If a date range falls outside what an integration returns, Lemonado will tell you rather than fill in the gap with stale or estimated values.
+
+<Tip>
+  Don't see the integration you need? Reach out at [hello@lemonado.io](mailto:hello@lemonado.io) and the team can prioritize it. In the meantime, you can import data manually via **Google Sheets** or a **CSV upload** to unblock your workflows.
+</Tip>
+
+<CardGroup cols={2}>
+  <Card title="Integrations Overview" icon="puzzle-piece" href="/integrations/overview">
+    See the full list of available integrations and what data each one surfaces.
+  </Card>
+  <Card title="Client Workspaces" icon="building" href="/workspaces">
+    Learn how to link connected data sources to specific client workspaces.
+  </Card>
+</CardGroup>

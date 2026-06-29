@@ -1,0 +1,116 @@
+---
+title: "Connect Lemonado to ChatGPT via MCP"
+sidebarTitle: "ChatGPT"
+description: "Add Lemonado as an MCP connector in ChatGPT to query your live marketing and revenue data directly inside your chat without exporting anything."
+---
+
+This guide walks you through adding Lemonado as an MCP connector in ChatGPT. Once connected, ChatGPT can query your live marketing data — Google Ads, Meta Ads, LinkedIn Ads, TikTok Ads, Stripe, and more — directly in the chat interface, with no exports, no CSVs, and no copy-pasting required.
+
+## Before you begin
+
+<Note>
+  Make sure you have the following before starting:
+
+  - An active Lemonado account with at least one data source connected (10-day free trial available at [data.lemonado.io](https://data.lemonado.io/signup))
+  - A **ChatGPT Plus, Pro, Business, Enterprise, or Education** plan — custom MCP connectors require one of these plans
+</Note>
+
+## Step 1: Enable custom connectors in ChatGPT
+
+<Steps>
+  <Step title="Go to ChatGPT">
+    Navigate to [chatgpt.com](https://chatgpt.com) in your browser.
+  </Step>
+  <Step title="Open Settings">
+    Click your **profile icon** in the bottom-left corner, then select **Settings**.
+  </Step>
+  <Step title="Navigate to Advanced Settings">
+    Go to **Apps → Advanced Settings**.
+  </Step>
+  <Step title="Enable Developer Mode">
+    Toggle on **Developer Mode** to unlock custom MCP connector support.
+  </Step>
+</Steps>
+
+<Note>
+  Custom MCP connectors are available on ChatGPT web for Plus, Pro, Business, Enterprise, and Education plans.
+</Note>
+
+## Step 2: Add Lemonado
+
+<Steps>
+  <Step title="Create a new app">
+    In **Settings → Apps**, click **Create app**.
+  </Step>
+  <Step title="Enter your connector details">
+    Fill in the following:
+
+    - **Name:** `Lemonado`
+    - **MCP Server URL:** `https://mcp.lemonado.io/mcp`
+    - **Authentication:** OAuth (recommended)
+  </Step>
+  <Step title="Save the connector">
+    Click **Create** to save.
+  </Step>
+  <Step title="Authorize ChatGPT in Lemonado">
+    ChatGPT redirects you to Lemonado. Log in and authorize access to your workspace.
+  </Step>
+  <Step title="Confirm the connection">
+    After authentication completes, Lemonado appears as a connected tool in your ChatGPT settings.
+  </Step>
+</Steps>
+
+<Note>
+  ChatGPT may display a warning about custom MCP servers accessing external data. Lemonado is fully read-only — it can query and analyze your data but cannot modify or delete anything in your connected platforms.
+</Note>
+
+## Step 3: Activate Lemonado in a chat
+
+<Steps>
+  <Step title="Start a new chat">
+    Open a new chat in ChatGPT.
+  </Step>
+  <Step title="Open the tools menu">
+    Click the **Tools / Apps / Connectors** button near the message input box.
+  </Step>
+  <Step title="Select Lemonado">
+    Choose **Lemonado** from your list of connected tools.
+  </Step>
+  <Step title="Confirm it is active">
+    Verify that Lemonado is shown as enabled for the current chat.
+  </Step>
+</Steps>
+
+Once active, ChatGPT automatically routes relevant data questions to Lemonado, querying your live marketing data in real time.
+
+## Example queries
+
+With Lemonado active in the chat, try questions like:
+
+- "Compare cost per purchase by channel over the last 30 days."
+- "Show blended CAC across all ad platforms for Q1."
+- "Which campaigns have high spend but no conversions in the last 14 days?"
+- "Which campaigns across Google, Meta, and LinkedIn drove the highest ROAS this week?"
+
+ChatGPT queries Lemonado's unified SQL engine to answer these questions — joining data from multiple platforms in a single response, all in real time.
+
+## Managing the connection
+
+To revoke or remove the connector, go to **Settings → Apps & Connectors**, select **Lemonado**, and choose to revoke access or remove the connector entirely.
+
+You can also rotate OAuth credentials at any time directly inside your Lemonado workspace under **AI Connectors** — no action required on the ChatGPT side.
+
+## Best practices
+
+- **Scope access appropriately** — only connect the data sources that are relevant to the queries you plan to run.
+- **Monitor query logs regularly** — review the Lemonado query log to track how ChatGPT is accessing your data and catch any unexpected usage.
+- **Rotate OAuth tokens periodically** — refresh tokens on a regular schedule and remove any connectors that are no longer needed.
+
+<CardGroup cols={2}>
+  <Card title="Connect to Claude" icon="robot" href="/ai-connectors/claude">
+    Add Lemonado as an MCP connector in Claude and query live marketing data directly in chat.
+  </Card>
+  <Card title="AI Connectors Overview" icon="plug" href="/ai-connectors/overview">
+    Learn how AI Connectors work, review supported tools, and understand security and governance.
+  </Card>
+</CardGroup>

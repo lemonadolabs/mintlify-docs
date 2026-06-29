@@ -1,0 +1,72 @@
+---
+title: "Connect Google Ads to Lemonado"
+sidebarTitle: "Google Ads"
+description: "Connect your Google Ads account to Lemonado to query campaign performance, creative data, and conversion metrics alongside your other marketing channels."
+---
+
+The Google Ads integration gives you full visibility into your paid search performance — directly inside Lemonado. Access the complete ad hierarchy (campaigns, ad groups, and ads), creative previews, every performance metric, pivot tables, and breakdowns by channel, gender, and age. Authentication is via OAuth and data updates in real time, so your analysis always reflects current performance.
+
+## What data is available
+
+- Campaign, ad group, and ad performance metrics (impressions, clicks, conversions, spend, ROAS, CPA, CTR)
+- Creative previews and ad copy
+- Audience breakdowns by gender, age, device, and geography
+- Search term reports and keyword-level data
+- Conversion tracking and attribution data
+- All data is read-only — Lemonado cannot modify campaigns or budgets
+
+## How to connect
+
+<Steps>
+  <Step title="Open Data in the sidebar">
+    Go to **Data** in the Lemonado sidebar.
+  </Step>
+  <Step title="Add a new source">
+    Click **Connect source**.
+  </Step>
+  <Step title="Select Google Ads">
+    Select **Google Ads** from the list of available integrations.
+  </Step>
+  <Step title="Authorize via OAuth">
+    Complete the OAuth flow — you'll be redirected to Google to authorize access.
+  </Step>
+  <Step title="Choose your accounts">
+    Select the Google Ads accounts you want to include.
+  </Step>
+  <Step title="Start querying">
+    Your data starts syncing immediately. Head to Chat to run your first query.
+  </Step>
+</Steps>
+
+## Example queries
+
+Ask Lemonado questions like these once your Google Ads account is connected:
+
+- "What was my ROAS on Google Ads last week, broken down by campaign?"
+- "Which Google Ads campaigns spent over $5,000 with a CPA above target this month?"
+- "Compare brand vs. non-brand keyword performance over the last 30 days."
+- "Show me search terms that triggered my ads but didn't convert."
+- "Which age group has the lowest CPC across all active campaigns?"
+
+## Prompt starters
+
+Lemonado includes a library of pre-built prompts to jumpstart your Google Ads analysis. Here are a few to get you started:
+
+- **Google Ads Essentials: 10-Pack** — ten ready-to-run prompts covering the most common Google Ads analysis tasks
+- **Brand vs Non-Brand Ad Budget Optimization** — identify where brand and non-brand spend is performing and where it isn't
+- **Google Ads Conversion Health Monitoring** — track conversion volume, quality, and attribution health across your account
+
+Browse the full library at [/resources/prompt-library](/resources/prompt-library).
+
+<Note>
+  Google Ads data is read-only. Lemonado cannot create, edit, pause, or delete campaigns, ads, or budgets.
+</Note>
+
+<CardGroup cols={2}>
+  <Card title="Meta Ads" icon="rectangle-ad" href="/integrations/meta-ads">
+    Connect your Facebook and Instagram ad accounts to analyze cross-platform performance.
+  </Card>
+  <Card title="Prompt Library" icon="book-open" href="/resources/prompt-library">
+    Browse pre-built prompts for Google Ads analysis and every other connected source.
+  </Card>
+</CardGroup>

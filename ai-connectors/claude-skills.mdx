@@ -1,0 +1,130 @@
+---
+title: "Claude Skills for Paid Media with Lemonado MCP"
+sidebarTitle: "Claude Skills"
+description: "Use Claude Skills alongside Lemonado MCP to run consistent, automated paid media workflows — weekly reports, account audits, and creative fatigue reviews on live data."
+---
+
+Claude Skills are packaged instruction sets that teach Claude how to handle specific, repeatable tasks. When you combine Skills with Lemonado's MCP connection, those Skills run on your live campaign data instead of static exports — making workflows like weekly reports, account audits, and creative reviews fully automated and consistently structured.
+
+## What are Claude Skills?
+
+A Skill is a folder containing a defined set of instructions and optional supporting files. The folder structure is:
+
+- **`SKILL.md`** *(required)* — instructions written in Markdown with YAML frontmatter that tell Claude when and how to apply the Skill
+- **`scripts/`** *(optional)* — executable code (Python, Bash, etc.) Claude can run as part of the workflow
+- **`references/`** *(optional)* — documentation files Claude loads as needed for deeper context
+- **`assets/`** *(optional)* — templates or output files used in generating the Skill's deliverable
+
+Skills use a **three-level loading system** that keeps token usage low while giving Claude deep, specialized knowledge:
+
+1. **YAML frontmatter** *(always loaded)* — tells Claude when the Skill is relevant and how to trigger it
+2. **SKILL.md body** *(loaded when relevant)* — the full workflow instructions Claude follows when the Skill activates
+3. **Linked files** *(loaded on demand)* — additional references and scripts Claude navigates when it needs deeper detail
+
+## Why combine Skills with Lemonado?
+
+| | Without Skills | With Skills |
+|---|---|---|
+| Data access | Live data via Lemonado MCP | Live data via Lemonado MCP |
+| Workflow | You explain the task every time | Claude knows the workflow automatically |
+| Consistency | Varies by how you prompt | Same structured output every time |
+| Best for | Ad hoc questions | Repeatable workflows: reports, audits, reviews |
+
+Lemonado provides the live data layer. Skills provide the repeatable workflow layer. Together, they give Claude everything it needs to analyze, report on, and surface insights from your ad accounts without requiring you to re-explain the process each time.
+
+## Three use cases to start with
+
+<AccordionGroup>
+  <Accordion title="Weekly Performance Report">
+    **Trigger:** "Run the weekly report for [client]"
+
+    Every week, the same task: pull the numbers, calculate the deltas, write the summary. This Skill automates the workflow. Lemonado provides the live data it runs on.
+
+    **Steps Claude follows:**
+    1. Query the last 7 days of campaign data from Lemonado for the specified client
+    2. Calculate core metrics — spend, ROAS, CPA, CTR, and conversions — vs. the prior 7 days
+    3. Flag any campaign where performance moved more than 15% in either direction
+    4. Structure the output as a client-ready summary: headline metrics, notable changes, and one recommended action per flagged campaign
+
+    **Result:** A formatted performance summary pulled from live data, ready to send without editing.
+  </Accordion>
+
+  <Accordion title="Account Audit">
+    **Trigger:** "Audit [client]'s account"
+
+    Account audits are high-value and time-consuming. This Skill runs the full process end to end — pulling data across campaigns, scoring against benchmarks, and surfacing a prioritized list of what to fix first.
+
+    **Steps Claude follows:**
+    1. Pull all active campaign and ad set data from Lemonado
+    2. Score each campaign against configurable benchmarks: ROAS floor, CPA ceiling, CTR threshold
+    3. Rank campaigns from worst to best performing against those benchmarks
+    4. For the bottom three, surface the specific metric that is failing and explain why it matters
+    5. Recommend a next action for each: pause, restructure, adjust bid strategy, or test new creative
+
+    **Result:** A prioritized audit with clear reasoning and recommended actions, grounded in live account data.
+  </Accordion>
+
+  <Accordion title="Creative Fatigue Review">
+    **Trigger:** "Check creative performance"
+
+    Creative fatigue is one of the most common — and most missed — performance drains in paid media. CTR drops gradually, CPC creeps up, and by the time you notice, you have wasted two weeks of budget. This Skill monitors trend data across active creatives and flags what needs to be refreshed before it becomes a problem.
+
+    **Steps Claude follows:**
+    1. Pull CTR and CPC data per creative for the last 14 days from Lemonado, segmented by ad set
+    2. Calculate the week-over-week trend for each creative: CTR delta and CPC delta
+    3. Flag creatives where CTR dropped more than 10% or CPC rose more than 15% week-over-week
+    4. Identify the specific ad sets where fatigue is most concentrated
+    5. Cross-reference against top performers in the same campaign to surface what is working as a reference point for replacement
+
+    **Result:** A creative fatigue report that tells you exactly what to pause, where to focus new production, and what benchmarks the next creative needs to beat.
+  </Accordion>
+</AccordionGroup>
+
+## Community Skills to try
+
+These Skills are built by [Corey Haines](https://github.com/coreyhaines31/marketingskills) and available as ready-to-install markdown files. Each one becomes significantly more powerful when Lemonado MCP is connected — instead of requiring you to paste data, Claude queries your live accounts directly.
+
+**1. paid-ads**
+
+Covers campaign structure, optimization logic, and performance analysis for Google and Meta. With Lemonado connected, every recommendation is backed by live spend, ROAS, CPA, and impression share data.
+
+```bash
+npx add-skill coreyhaines31/marketingskills --skill paid-ads
+```
+
+**2. analytics-tracking**
+
+Covers measurement, attribution, and conversion analysis. With Lemonado's Google Analytics integration alongside your ad platforms, this Skill can answer the question most marketers struggle with: did the campaign drive conversions, or just clicks?
+
+```bash
+npx add-skill coreyhaines31/marketingskills --skill analytics-tracking
+```
+
+**3. ad-creative**
+
+Generates and iterates ad headlines and primary text. With Lemonado data behind it, Claude can see actual CTR and CPC performance per creative before writing the next iteration — optimizing against what is actually working, not generating blindly.
+
+```bash
+npx add-skill coreyhaines31/marketingskills --skill ad-creative
+```
+
+## Prerequisites
+
+Before using Skills with Lemonado:
+
+- A Lemonado account with at least one data source connected
+- Claude connected to Lemonado MCP (see [Connect to Claude](/ai-connectors/claude))
+- A Claude Pro or Team subscription — Skills require a paid Claude plan
+
+<Tip>
+  Not ready to build custom Skills? Connect Lemonado MCP to Claude and start asking questions like "How did my Meta campaigns perform last week?" — no Skills required. Skills just make repeatable workflows consistent and automatic.
+</Tip>
+
+<CardGroup cols={2}>
+  <Card title="Connect to Claude" icon="robot" href="/ai-connectors/claude">
+    Set up the Lemonado MCP connection in Claude that Skills run on.
+  </Card>
+  <Card title="Agents" icon="bolt" href="/features/agents">
+    Use Lemonado's built-in agents for automated reporting and account monitoring — no Skills or external subscriptions required.
+  </Card>
+</CardGroup>
