@@ -1,7 +1,7 @@
 ---
-title: "Upload CSV Files to Lemonado"
+title: "Upload a CSV File to Lemonado – Import Any Dataset"
 sidebarTitle: "CSV"
-description: "Upload CSV files to Lemonado to include custom or one-off datasets in your analysis — no integration required for data that lives outside supported platforms."
+description: "Upload CSV files to Lemonado to include custom or one-off datasets in your analysis — no integration required for unsupported platforms."
 ---
 
 CSV upload lets you bring any tabular data into Lemonado without a live integration. It's ideal for one-off imports, data from platforms that don't have a direct connector yet, or quick exports you want to cross-reference with your live marketing data.
@@ -43,6 +43,10 @@ Follow these guidelines to get the best results from Lemonado's automatic schema
 - Upload a CSV export from an unsupported ad platform and compare its performance to Meta and Google Ads data
 - Import a customer list for segmentation analysis alongside your Stripe data
 - Upload offline conversion data and cross-reference it with online ad spend to measure true campaign ROI
+
+<Note>
+  CSV data is read-only. Lemonado queries your uploaded file but cannot write back to it or modify the original.
+</Note>
 
 <Tip>
   For data that updates regularly, use the <a href="/integrations/google-sheets">Google Sheets integration</a> instead of CSV. Connect a sheet once and Lemonado picks up changes automatically — no re-uploading needed.
