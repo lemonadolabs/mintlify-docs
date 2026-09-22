@@ -1,39 +1,72 @@
 {
   "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
   "name": "Lemonado",
-  "theme": "almond",
-  "logo": {
-    "light": "https://media.brand.dev/26992676-a23a-4c08-a586-bbc8cafa42bd.svg",
-    "dark": "https://media.brand.dev/26992676-a23a-4c08-a586-bbc8cafa42bd.svg"
-  },
-  "favicon": "https://media.brand.dev/2f9c8199-1912-4762-84dc-e96e8b5fa54f.png",
+  "description": "Simple guides for getting useful marketing work done with Lemonado.",
   "colors": {
-    "primary": "#0e162d",
-    "light": "#848c94",
-    "dark": "#c8cace"
+    "primary": "#0B152B",
+    "light": "#FF735E",
+    "dark": "#7563B3"
   },
   "fonts": {
+    "family": "Inter",
     "heading": {
       "family": "Manrope"
-    },
-    "body": {
-      "family": "Inter"
     }
   },
-  "navbar": {
-    "primary": {
-      "type": "button",
-      "label": "Try for free",
-      "href": "https://data.lemonado.io"
-    }
+  "icons": {
+    "library": "lucide"
+  },
+  "favicon": "/lemonado-favicon.svg",
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg",
+    "href": "/"
   },
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Everyday work",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Start here",
+            "icon": "sparkles",
+            "pages": [
+              "index",
+              "why-lemonado",
+              "getting-started",
+              "workspace-tour"
+            ]
+          },
+          {
+            "group": "Use Lemonado",
+            "icon": "wand-sparkles",
+            "pages": [
+              "ask-lemonado",
+              "work-together",
+              "connectors",
+              "brand-and-memory",
+              "creatives",
+              "studio",
+              "skills",
+              "tasks"
+            ]
+          },
+          {
+            "group": "For agencies",
+            "icon": "briefcase-business",
+            "pages": [
+              "agencies",
+              "portal"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Detailed guides",
+        "groups": [
+          {
+            "group": "Get started",
             "pages": [
               "introduction",
               "quickstart",
@@ -52,7 +85,7 @@
             ]
           },
           {
-            "group": "AI Connectors",
+            "group": "AI connectors",
             "pages": [
               "ai-connectors/overview",
               "ai-connectors/claude",
@@ -86,6 +119,29 @@
           }
         ]
       }
+    ]
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Website",
+        "href": "https://lemonado.io"
+      },
+      {
+        "label": "Support",
+        "href": "mailto:support@lemonado.io"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Open Lemonado",
+      "href": "https://data.lemonado.io"
+    }
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view"
     ]
   },
   "footer": {
