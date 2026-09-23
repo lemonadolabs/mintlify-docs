@@ -24,99 +24,39 @@
     "href": "/"
   },
   "navigation": {
-    "tabs": [
+    "groups": [
       {
-        "tab": "Everyday work",
-        "groups": [
-          {
-            "group": "Start here",
-            "icon": "sparkles",
-            "pages": [
-              "index",
-              "why-lemonado",
-              "getting-started",
-              "workspace-tour"
-            ]
-          },
-          {
-            "group": "Use Lemonado",
-            "icon": "wand-sparkles",
-            "pages": [
-              "ask-lemonado",
-              "work-together",
-              "connectors",
-              "brand-and-memory",
-              "creatives",
-              "studio",
-              "skills",
-              "tasks"
-            ]
-          },
-          {
-            "group": "For agencies",
-            "icon": "briefcase-business",
-            "pages": [
-              "agencies",
-              "portal"
-            ]
-          }
+        "group": "Start here",
+        "icon": "compass",
+        "pages": [
+          "index",
+          "why-lemonado",
+          "getting-started",
+          "workspace-tour"
         ]
       },
       {
-        "tab": "Detailed guides",
-        "groups": [
-          {
-            "group": "Get started",
-            "pages": [
-              "introduction",
-              "quickstart",
-              "connecting-data",
-              "workspaces"
-            ]
-          },
-          {
-            "group": "Features",
-            "pages": [
-              "features/chat",
-              "features/studio",
-              "features/creative-analytics",
-              "features/agents",
-              "features/mcp"
-            ]
-          },
-          {
-            "group": "AI connectors",
-            "pages": [
-              "ai-connectors/overview",
-              "ai-connectors/claude",
-              "ai-connectors/chatgpt",
-              "ai-connectors/claude-skills"
-            ]
-          },
-          {
-            "group": "Integrations",
-            "pages": [
-              "integrations/overview",
-              "integrations/google-ads",
-              "integrations/meta-ads",
-              "integrations/linkedin-ads",
-              "integrations/tiktok-ads",
-              "integrations/google-analytics",
-              "integrations/google-search-console",
-              "integrations/stripe",
-              "integrations/snowflake",
-              "integrations/google-sheets",
-              "integrations/csv"
-            ]
-          },
-          {
-            "group": "Resources",
-            "pages": [
-              "resources/prompt-library",
-              "resources/pricing",
-              "resources/faq"
-            ]
-          }
+        "group": "Use Lemonado",
+        "icon": "mouse-pointer-2",
+        "pages": [
+          "ask-lemonado",
+          "work-together",
+          "connectors",
+          "brand-and-memory",
+          "creatives",
+          "studio",
+          "skills",
+          "routines",
+          "team-channels",
+          "external-ai"
+        ]
+      },
+      {
+        "group": "For agencies",
+        "icon": "briefcase-business",
+        "pages": [
+          "agencies",
+          "portal"
         ]
       }
     ]
@@ -135,18 +75,25 @@
     "primary": {
       "type": "button",
       "label": "Open Lemonado",
-      "href": "https://data.lemonado.io"
+      "href": "https://app.lemonado.io"
     }
   },
   "contextual": {
-    "options": [
-      "copy",
-      "view"
-    ]
+    "options": []
   },
-  "footer": {
-    "socials": {
-      "website": "https://lemonado.io"
-    }
-  }
+  "redirects": [
+    { "source": "/tasks", "destination": "/routines" },
+    { "source": "/introduction", "destination": "/" },
+    { "source": "/quickstart", "destination": "/getting-started" },
+    { "source": "/connecting-data", "destination": "/connectors" },
+    { "source": "/workspaces", "destination": "/workspace-tour" },
+    { "source": "/features/chat", "destination": "/ask-lemonado" },
+    { "source": "/features/studio", "destination": "/studio" },
+    { "source": "/features/creative-analytics", "destination": "/creatives" },
+    { "source": "/features/agents", "destination": "/routines" },
+    { "source": "/integrations/:path*", "destination": "/connectors" },
+    { "source": "/features/mcp", "destination": "/external-ai" },
+    { "source": "/ai-connectors/:path*", "destination": "/external-ai" },
+    { "source": "/resources/prompt-library", "destination": "/ask-lemonado" }
+  ]
 }

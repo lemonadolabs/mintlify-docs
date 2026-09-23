@@ -1,55 +1,37 @@
-# Mintlify Starter Kit
+# Lemonado documentation
 
-Use the starter kit to get your docs deployed and ready to customize.
+Short, screenshot-led guides for marketing teams and agencies, built with Mintlify.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## Preview
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+Install the [Mintlify CLI](https://www.npmjs.com/package/mint), then run this from the repository root:
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
-
-## AI-assisted writing
-
-Set up your AI coding tool to work with Mintlify:
-
-```bash
-npx skills add https://mintlify.com/docs
-```
-
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
-
-See the [AI tools guides](/ai-tools) for tool-specific setup.
-
-## Development
-
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
-
-```
-npm i -g mint
-```
-
-Run the following command at the root of your documentation, where your `docs.json` is located:
-
-```
+```sh
 mint dev
 ```
 
-View your local preview at `http://localhost:3000`.
+Open the local address printed by the command.
 
-## Publishing changes
+## Edit a guide
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+- Write in everyday language, using “you” and short sentences.
+- Use the exact labels shown in Lemonado, such as **Routines** and **Installed**.
+- Give each page one clear job. Prefer a short example to a long explanation.
+- Capture real product screens with demo data. Avoid private details, errors, and loading states.
+- Store screenshots in `images/screenshots/` and give each image useful alt text.
+- Keep navigation and redirects in `docs.json` up to date.
+- Keep internal notes under `drafts/`, which is excluded from the site.
 
-## Need help?
+## Check before publishing
 
-### Troubleshooting
+```sh
+mint validate
+mint broken-links
+mint a11y
+```
 
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
+Also review the rendered pages on desktop and mobile, in light and dark mode. Check that screenshots match the current interface and remain readable when expanded.
 
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+## Publish
+
+After this repository and branch are connected in the Mintlify dashboard, pushing changes to that branch triggers a deployment. Check the deployment status in Mintlify before sharing the live site.
