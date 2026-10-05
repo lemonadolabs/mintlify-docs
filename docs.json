@@ -4,9 +4,9 @@
   "name": "Lemonado",
   "description": "Simple guides for getting useful marketing work done with Lemonado.",
   "colors": {
-    "primary": "#0B152B",
-    "light": "#FF735E",
-    "dark": "#7563B3"
+    "primary": "#000000",
+    "light": "#FFFFFF",
+    "dark": "#000000"
   },
   "fonts": {
     "family": "Inter",

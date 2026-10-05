@@ -1,0 +1,14 @@
+/* Keep the navbar call to action readable in dark mode. */
+.dark #topbar-cta-button .bg-primary-dark {
+  background-color: #ffffff;
+}
+
+.dark #topbar-cta-button .text-white,
+.dark #topbar-cta-button svg {
+  color: #000000;
+}
+
+/* The custom sidebar mark is a black SVG image. */
+.dark img[src$="/logo/mark.svg"] {
+  filter: invert(1);
+}
