@@ -1,49 +1,33 @@
 ---
 title: "MCP reference"
-description: "Choose a Lemonado MCP connection and understand its tools, analysis, permissions, and memory limits."
+description: "Connect to Lemonado MCP and understand its tools, permissions, and memory limits."
 sidebarTitle: "MCP reference"
 icon: "plug"
 ---
 
 Lemonado's MCP server lets an external AI app work with your connected data. Start with [Connect an app](/external-ai) to enable access for the right company.
 
-## Server addresses
+<span id="server-addresses" />
 
-Use the address shown in Lemonado's setup guide for your connection. The address determines which tools your AI app receives.
+## Connect to Lemonado MCP
 
-**General MCP**
+For a custom MCP connection, use this server address:
 
 ```text
 https://mcp.lemonado.io/mcp
 ```
 
-Tools for discovering sources, running SQL, and using enabled connector actions. A SQL call returns data for the external AI app to interpret.
+Enable access for the company you want to use, then follow [Connect an app](/external-ai). The server uses **Streamable HTTP**. Configure it as a remote HTTP server in your client.
 
-**ChatGPT analysis**
+For ChatGPT or Claude, select your app in Lemonado's **External access** settings and follow its guide. Directory connections are available once Lemonado is published in the app's directory.
 
-```text
-https://mcp.lemonado.io/chatgpt/mcp
-```
-
-Four tools for discovering connected accounts and requesting marketing-data analysis. The two analysis tools run AI inside Lemonado.
-
-**Claude analysis**
-
-```text
-https://mcp.lemonado.io/claude/mcp
-```
-
-The same four analysis and discovery tools, with results presented for Claude.
-
-An existing Claude or ChatGPT connection may use the general `/mcp` address. The name of the AI app alone does not identify its tools.
-
-All three addresses use Streamable HTTP. They are remote servers, not local programs to launch with a stdio configuration. OAuth authorization is specific to the server address: if you change addresses, authorize a new connection using its setup flow.
+This reference starts with the general MCP tools. [Integration details](#integration-details) for ChatGPT and Claude are at the end.
 
 ## Memory and instructions
 
 These MCP tools do not load the memory files or instructions you have saved in Lemonado. There is no built-in MCP tool to read or write that memory. Asking the external AI app to “use Lemonado's memory” does not give it access.
 
-Give the external AI app any relevant business context, metric definitions, or reporting rules separately. For an analysis call, include the relevant context in `question` for `answer_data_question`, or in `metric` for `explain_metric_change`. Lemonado uses that request, source information, query results, and its built-in analysis prompts.
+Give the external AI app any relevant business context, metric definitions, or reporting rules separately. For the dedicated analysis tools, include that context in the analysis request as described in [integration details](#integration-details).
 
 ## General tools
 
@@ -88,7 +72,38 @@ All three also require `clientId` when the connection is not fixed to one compan
 
 Call `get_action_details` before executing an action, and match its input schema. Actions can include writes, so the general MCP connection is not universally read-only. Lemonado enforces the action's policy. Actions requiring approval return an approval-required error instead of running from an external MCP client.
 
-## Analysis tools
+## Access and troubleshooting
+
+- **Authentication:** Follow the in-app setup for OAuth or, where offered, a generated bearer token. Use the expiry shown when generating a token; do not assume it lasts forever.
+- **Scope:** Tools can access only the companies and sources allowed by the connection and Lemonado's permission checks. Giving the AI an account ID does not grant access to it.
+- **Missing tool:** Check the configured server address and refresh your client's tool discovery. The general and analysis addresses expose different catalogs.
+- **Missing source or account:** Check the selected company and its connected accounts in Lemonado. Use the appropriate discovery tools before querying.
+- **No data or partial results:** Check dates, account selection, returned warnings, and preview limits. Do not treat missing or failed data as zero.
+- **Stop access:** Turn off the connection in **External access** in the company's settings.
+
+For help, contact [support@lemonado.io](mailto:support@lemonado.io) with the server address, tool name, and error message. Never send your token.
+
+## Integration details
+
+This section is for developers configuring or troubleshooting the dedicated ChatGPT and Claude integrations. For normal setup, use the in-app guide.
+
+**ChatGPT integration**
+
+```text
+https://mcp.lemonado.io/chatgpt/mcp
+```
+
+**Claude integration**
+
+```text
+https://mcp.lemonado.io/claude/mcp
+```
+
+These integrations expose the four read-only tools below, with results presented for each app. They do not expose the general MCP tool catalog.
+
+An existing Claude or ChatGPT connection may use `/mcp`. Check its configured address when troubleshooting; the app name alone does not identify its tools. All three addresses use Streamable HTTP. OAuth authorization is specific to the address, so changing it requires a new authorization through the setup flow.
+
+### Analysis tools
 
 Both `/chatgpt/mcp` and `/claude/mcp` expose these four tools. All four are read-only.
 
@@ -97,9 +112,9 @@ Both `/chatgpt/mcp` and `/claude/mcp` expose these four tools. All four are read
 - **`answer_data_question`**: Asks Lemonado to query and analyze connected marketing data.
 - **`explain_metric_change`**: Compares a metric between two periods and inspects supported breakdowns.
 
-In these tools, `projectId` identifies the company or project returned by `list_projects`.
+In these tools, `projectId` identifies the company or project returned by `list_projects`. Include relevant business context in `question` for `answer_data_question`, or in `metric` for `explain_metric_change`. Lemonado uses that request, source information, query results, and its built-in analysis prompts.
 
-### Ask a data question
+#### Ask a data question
 
 `answer_data_question` accepts:
 
@@ -114,7 +129,7 @@ For example, ask your AI app:
 
 The AI app discovers the project and account, then sends the question to Lemonado. If several accounts match, choose the one you intend to use.
 
-### Compare two periods
+#### Compare two periods
 
 `explain_metric_change` accepts:
 
@@ -130,14 +145,3 @@ For example:
 Both analysis tools use AI inside Lemonado to plan data queries. Lemonado calculates period comparisons from the query results; `answer_data_question` can also use AI to summarize the results. Responses can include tables, charts, sources, and coverage warnings. Discovery calls do not run that analysis. Observed changes identify contributions in the returned data; they do not by themselves establish a cause.
 
 These four tools do not create saved Studio reports, schedule routines, connect new data sources, or change campaigns.
-
-## Access and troubleshooting
-
-- **Authentication:** Follow the in-app setup for OAuth or, where offered, a generated bearer token. Use the expiry shown when generating a token; do not assume it lasts forever.
-- **Scope:** Tools can access only the companies and sources allowed by the connection and Lemonado's permission checks. Giving the AI an account ID does not grant access to it.
-- **Missing tool:** Check the configured server address and refresh your client's tool discovery. The general and analysis addresses expose different catalogs.
-- **Missing source or account:** Check the selected company and its connected accounts in Lemonado. Use the appropriate discovery tools before querying.
-- **No data or partial results:** Check dates, account selection, returned warnings, and preview limits. Do not treat missing or failed data as zero.
-- **Stop access:** Turn off the connection in **External access** in the company's settings.
-
-For help, contact [support@lemonado.io](mailto:support@lemonado.io) with the server address, tool name, and error message. Never send your token.
