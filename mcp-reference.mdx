@@ -1,0 +1,143 @@
+---
+title: "MCP reference"
+description: "Choose a Lemonado MCP connection and understand its tools, analysis, permissions, and memory limits."
+sidebarTitle: "MCP reference"
+icon: "plug"
+---
+
+Lemonado's MCP server lets an external AI app work with your connected data. Start with [Connect an app](/external-ai) to enable access for the right company.
+
+## Server addresses
+
+Use the address shown in Lemonado's setup guide for your connection. The address determines which tools your AI app receives.
+
+**General MCP**
+
+```text
+https://mcp.lemonado.io/mcp
+```
+
+Tools for discovering sources, running SQL, and using enabled connector actions. A SQL call returns data for the external AI app to interpret.
+
+**ChatGPT analysis**
+
+```text
+https://mcp.lemonado.io/chatgpt/mcp
+```
+
+Four tools for discovering connected accounts and requesting marketing-data analysis. The two analysis tools run AI inside Lemonado.
+
+**Claude analysis**
+
+```text
+https://mcp.lemonado.io/claude/mcp
+```
+
+The same four analysis and discovery tools, with results presented for Claude.
+
+An existing Claude or ChatGPT connection may use the general `/mcp` address. The name of the AI app alone does not identify its tools.
+
+All three addresses use Streamable HTTP. They are remote servers, not local programs to launch with a stdio configuration. OAuth authorization is specific to the server address: if you change addresses, authorize a new connection using its setup flow.
+
+## Memory and instructions
+
+These MCP tools do not load the memory files or instructions you have saved in Lemonado. There is no built-in MCP tool to read or write that memory. Asking the external AI app to “use Lemonado's memory” does not give it access.
+
+Give the external AI app any relevant business context, metric definitions, or reporting rules separately. For an analysis call, include the relevant context in `question` for `answer_data_question`, or in `metric` for `explain_metric_change`. Lemonado uses that request, source information, query results, and its built-in analysis prompts.
+
+## General tools
+
+The `/mcp` address exposes the tools below. Your connection's scope and enabled features determine which company and action tools appear. A client may add its own prefix to the displayed tool names.
+
+### Data queries
+
+- **`list_objects`**: Lists SQL-queryable tables and views available to the connection. No inputs.
+- **`get_object_details`**: Takes `viewName`. Returns columns for a regular view, or parameters and usage details for a parameterized view.
+- **`execute_sql`**: Takes `sql`. Returns results from a read-only ClickHouse SQL query, with columns and a bounded row preview.
+- **`get_google_ads_resource_metadata`**: Takes `viewName` and optional `resourceName`. Returns valid Google Ads resources, or fields and compatibility metadata for one resource.
+
+The external AI app writes the SQL. Lemonado checks access, executes the query, and returns results; `execute_sql` does not run an AI analysis of those results.
+
+Use this order:
+
+1. Call `list_objects` to find the available source.
+2. Call `get_object_details` with its returned `viewName`. Use its documented parameters and account identifiers. For Google Ads, also use `get_google_ads_resource_metadata` before choosing fields.
+3. Call `execute_sql` with a read-only query built from that information.
+4. Check the result's `preview.truncated` field. If it is `true`, the displayed rows are only a preview. Aggregate or narrow the query before drawing conclusions from them.
+
+An empty result means the query returned no matching rows. A failed query does not mean the metric was zero.
+
+### Company discovery
+
+These tools appear when company discovery is available and the connection is not already fixed to one company.
+
+- **`list_companies`**: Lists available companies with their project IDs, names, and descriptions. No inputs. Use a returned project ID as `companyId` when requesting details.
+- **`get_company_details`**: Takes `companyId`. Returns source bindings and identifiers for a selected company.
+
+`list_clients` and `get_client_details` are legacy aliases. The latter uses `clientId` instead of `companyId`.
+
+### Connector actions
+
+Some connected services expose actions rather than SQL tables. A service missing from `list_objects` may still be available through `list_actions`.
+
+- **`list_actions`**: Lists enabled actions and their approval policies.
+- **`get_action_details`**: Takes `actionId`. Returns the action's input schema and approval policy.
+- **`execute_action`**: Takes `actionId` and optional `arguments`. Returns the result of executing an allowed connector action.
+
+All three also require `clientId` when the connection is not fixed to one company.
+
+Call `get_action_details` before executing an action, and match its input schema. Actions can include writes, so the general MCP connection is not universally read-only. Lemonado enforces the action's policy. Actions requiring approval return an approval-required error instead of running from an external MCP client.
+
+## Analysis tools
+
+Both `/chatgpt/mcp` and `/claude/mcp` expose these four tools. All four are read-only.
+
+- **`list_projects`**: Finds companies or projects available through your connection. No inputs.
+- **`list_project_sources`**: Takes `projectId`. Finds its connected sources and account identities.
+- **`answer_data_question`**: Asks Lemonado to query and analyze connected marketing data.
+- **`explain_metric_change`**: Compares a metric between two periods and inspects supported breakdowns.
+
+In these tools, `projectId` identifies the company or project returned by `list_projects`.
+
+### Ask a data question
+
+`answer_data_question` accepts:
+
+- **`question`**: Required. Include the question, source, and selected account.
+- **`projectId`**: Use an ID returned by `list_projects`. You can omit it when only one project is available.
+- **`timeRange`**: Optional date range. If neither this field nor the question specifies dates, the tool uses the last 30 days.
+- **`timeZone`**: Optional IANA time zone, such as `Europe/Stockholm`, for resolving relative dates. Without it, relative dates use UTC. This does not change the reporting calendar of daily source data.
+
+For example, ask your AI app:
+
+> Show spend, clicks, and conversions for my selected Google Ads account from 1 to 7 October 2026.
+
+The AI app discovers the project and account, then sends the question to Lemonado. If several accounts match, choose the one you intend to use.
+
+### Compare two periods
+
+`explain_metric_change` accepts:
+
+- **`metric`**: Required. Name the metric, source, account, and any requested filters.
+- **`currentPeriod`** and **`comparisonPeriod`**: Required date ranges.
+- **`projectId`** and **`timeZone`**: The same rules as above.
+- **`breakdowns`**: Optional dimensions, such as campaign or device. The tool inspects up to two requested dimensions, chooses one supported dimension when omitted, or returns totals only when given `[]`.
+
+For example:
+
+> Compare Google Ads spend for my selected account on 1–7 October versus 24–30 September 2026, broken down by campaign.
+
+Both analysis tools use AI inside Lemonado to plan data queries. Lemonado calculates period comparisons from the query results; `answer_data_question` can also use AI to summarize the results. Responses can include tables, charts, sources, and coverage warnings. Discovery calls do not run that analysis. Observed changes identify contributions in the returned data; they do not by themselves establish a cause.
+
+These four tools do not create saved Studio reports, schedule routines, connect new data sources, or change campaigns.
+
+## Access and troubleshooting
+
+- **Authentication:** Follow the in-app setup for OAuth or, where offered, a generated bearer token. Use the expiry shown when generating a token; do not assume it lasts forever.
+- **Scope:** Tools can access only the companies and sources allowed by the connection and Lemonado's permission checks. Giving the AI an account ID does not grant access to it.
+- **Missing tool:** Check the configured server address and refresh your client's tool discovery. The general and analysis addresses expose different catalogs.
+- **Missing source or account:** Check the selected company and its connected accounts in Lemonado. Use the appropriate discovery tools before querying.
+- **No data or partial results:** Check dates, account selection, returned warnings, and preview limits. Do not treat missing or failed data as zero.
+- **Stop access:** Turn off the connection in **External access** in the company's settings.
+
+For help, contact [support@lemonado.io](mailto:support@lemonado.io) with the server address, tool name, and error message. Never send your token.

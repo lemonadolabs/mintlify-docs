@@ -48,7 +48,8 @@
           "skills",
           "routines",
           "team-channels",
-          "external-ai"
+          "external-ai",
+          "mcp-reference"
         ]
       },
       {
@@ -92,7 +93,7 @@
     { "source": "/features/creative-analytics", "destination": "/creatives" },
     { "source": "/features/agents", "destination": "/routines" },
     { "source": "/integrations/:path*", "destination": "/connectors" },
-    { "source": "/features/mcp", "destination": "/external-ai" },
+    { "source": "/features/mcp", "destination": "/mcp-reference" },
     { "source": "/ai-connectors/:path*", "destination": "/external-ai" },
     { "source": "/resources/prompt-library", "destination": "/ask-lemonado" }
   ]
