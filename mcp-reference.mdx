@@ -11,17 +11,32 @@ Lemonado's MCP server lets an external AI app work with your connected data. Sta
 
 ## Connect to Lemonado MCP
 
-For a custom MCP connection, use this server address:
+### Claude and ChatGPT
+
+Enable access for the company you want to use in [External access](/external-ai), then open your app's link below. Follow the prompts to connect Lemonado and approve access.
+
+<Columns cols={2}>
+  <Card title="Open Lemonado in Claude" href="https://claude.ai/directory/lemonado" arrow>
+    Open the Lemonado connector by Lemonado AB.
+  </Card>
+  <Card title="Open Lemonado in ChatGPT" href="https://chatgpt.com/plugins/plugin_asdk_app_69455664de448191bc42a9f6584d34e5" arrow>
+    Open the Lemonado plugin by Lemonado AB.
+  </Card>
+</Columns>
+
+If you cannot open a listing, contact [support@lemonado.io](mailto:support@lemonado.io) for help.
+
+### Other MCP clients
+
+For a custom connection in another MCP client, use this server address:
 
 ```text
 https://mcp.lemonado.io/mcp
 ```
 
-Enable access for the company you want to use, then follow [Connect an app](/external-ai). The server uses **Streamable HTTP**. Configure it as a remote HTTP server in your client.
+The server uses **Streamable HTTP**. Enable the company's connection in [External access](/external-ai), then follow the in-app guide to configure your client as a remote HTTP server.
 
-For ChatGPT or Claude, select your app in Lemonado's **External access** settings and follow its guide. Directory connections are available once Lemonado is published in the app's directory.
-
-This reference starts with the general MCP tools. [Integration details](#integration-details) for ChatGPT and Claude are at the end.
+This reference covers [general tools](#general-tools) for custom clients and [analysis tools](#analysis-tools) for the Claude and ChatGPT apps.
 
 ## Memory and instructions
 
@@ -76,36 +91,22 @@ Call `get_action_details` before executing an action, and match its input schema
 
 - **Authentication:** Follow the in-app setup for OAuth or, where offered, a generated bearer token. Use the expiry shown when generating a token; do not assume it lasts forever.
 - **Scope:** Tools can access only the companies and sources allowed by the connection and Lemonado's permission checks. Giving the AI an account ID does not grant access to it.
-- **Missing tool:** Check the configured server address and refresh your client's tool discovery. The general and analysis addresses expose different catalogs.
+- **Missing tool:** Refresh your client's tool discovery. Custom MCP clients use the general tools; the Claude and ChatGPT apps use the analysis tools.
 - **Missing source or account:** Check the selected company and its connected accounts in Lemonado. Use the appropriate discovery tools before querying.
 - **No data or partial results:** Check dates, account selection, returned warnings, and preview limits. Do not treat missing or failed data as zero.
 - **Stop access:** Turn off the connection in **External access** in the company's settings.
 
-For help, contact [support@lemonado.io](mailto:support@lemonado.io) with the server address, tool name, and error message. Never send your token.
+For help, contact [support@lemonado.io](mailto:support@lemonado.io) with the app name, tool name, and error message. Never send your token.
 
 ## Integration details
 
-This section is for developers configuring or troubleshooting the dedicated ChatGPT and Claude integrations. For normal setup, use the in-app guide.
+The Claude and ChatGPT apps provide the four read-only analysis tools below, with results presented for each app. Use the [app links above](#claude-and-chatgpt) to connect.
 
-**ChatGPT integration**
-
-```text
-https://mcp.lemonado.io/chatgpt/mcp
-```
-
-**Claude integration**
-
-```text
-https://mcp.lemonado.io/claude/mcp
-```
-
-These integrations expose the four read-only tools below, with results presented for each app. They do not expose the general MCP tool catalog.
-
-An existing Claude or ChatGPT connection may use `/mcp`. Check its configured address when troubleshooting; the app name alone does not identify its tools. All three addresses use Streamable HTTP. OAuth authorization is specific to the address, so changing it requires a new authorization through the setup flow.
+An older custom connection may still expose the general tools. To use the app's analysis tools, connect through its directory listing.
 
 ### Analysis tools
 
-Both `/chatgpt/mcp` and `/claude/mcp` expose these four tools. All four are read-only.
+Both apps expose these four tools. All four are read-only.
 
 - **`list_projects`**: Finds companies or projects available through your connection. No inputs.
 - **`list_project_sources`**: Takes `projectId`. Finds its connected sources and account identities.
