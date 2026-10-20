@@ -12,3 +12,17 @@
 .dark img[src$="/logo/mark.svg"] {
   filter: invert(1);
 }
+
+/* Keep the changelog header compact at every viewport width. */
+body:has(#changelog-feed) #header > #page-context-menu {
+  display: none;
+}
+
+body:has(#changelog-feed) #header :has(> #page-title) {
+  flex-direction: row;
+  align-items: center;
+}
+
+body:has(#changelog-feed) #header :has(> #page-title) #page-context-menu {
+  display: flex;
+}
