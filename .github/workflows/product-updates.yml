@@ -1,0 +1,50 @@
+name: Publish product updates
+on:
+  repository_dispatch:
+    types: [product-updates]
+  workflow_dispatch:
+    inputs:
+      generation:
+        description: Publication generation from the CMS publishing status
+        required: true
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: product-update-publishing
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    environment: product-update-publishing
+    env:
+      PUBLICATION_GENERATION: ${{ github.event.client_payload.generation || inputs.generation }}
+      PRODUCT_UPDATES_CORE_URL: ${{ vars.PRODUCT_UPDATES_CORE_URL }}
+      PRODUCT_UPDATES_DOCS_URL: ${{ vars.PRODUCT_UPDATES_DOCS_URL }}
+      PRODUCT_UPDATES_DOCS_BRANCH: ${{ vars.PRODUCT_UPDATES_DOCS_BRANCH }}
+      PRODUCT_UPDATES_AUTO_MERGE: ${{ vars.PRODUCT_UPDATES_AUTO_MERGE }}
+      PRODUCT_UPDATES_SERVICE_TOKEN: ${{ secrets.PRODUCT_UPDATES_SERVICE_TOKEN }}
+      GH_TOKEN: ${{ secrets.PRODUCT_UPDATES_GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ vars.PRODUCT_UPDATES_DOCS_BRANCH || github.event.repository.default_branch }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node --test scripts/product-updates.test.mjs scripts/product-update-publication.test.mjs
+      - run: node scripts/publish-product-updates.mjs generate
+      # Pin this repository's tested CLI, configured during deployment preflight.
+      - name: Validate generated docs
+        env:
+          MINT_CLI_VERSION: ${{ vars.MINT_CLI_VERSION }}
+        run: |
+          test -n "$MINT_CLI_VERSION"
+          npx --yes "mint@$MINT_CLI_VERSION" validate
+          npx --yes "mint@$MINT_CLI_VERSION" broken-links
+      - run: node scripts/publish-product-updates.mjs publish
+
+      - name: Report failed publication
+        if: failure()
+        run: node scripts/publish-product-updates.mjs fail
